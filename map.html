@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zarenthia Kingdoms | Wereldkaart</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--night:#14101c;
+--night-deep:#0c0a12;
+--panel:#221934;
+--gold:#c9a227;
+--gold-bright:#ecca6a;
+--parchment:#f1e6c9;
+--parchment-dim:#d9cba3;
+--lavender:#a89cba;
+--line:rgba(201,162,39,.25);
+--crimson:#7d2039;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'EB Garamond',serif;
+color:var(--parchment);
+background:
+radial-gradient(circle at top,rgba(125,32,57,.35),transparent 55%),
+radial-gradient(circle at right,rgba(201,162,39,.08),transparent 55%),
+linear-gradient(var(--night),var(--night-deep));
+}
+
+header{
+position:sticky;
+top:0;
+z-index:100;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 7%;
+background:rgba(12,10,18,.88);
+backdrop-filter:blur(10px);
+border-bottom:1px solid var(--line);
+}
+
+.logo{
+font-family:Cinzel;
+font-size:1.2rem;
+font-weight:bold;
+letter-spacing:2px;
+}
+
+nav{
+display:flex;
+gap:35px;
+}
+
+nav a{
+text-decoration:none;
+font-family:Cinzel;
+font-size:.8rem;
+text-transform:uppercase;
+color:var(--lavender);
+transition:.3s;
+}
+
+nav a:hover{
+color:var(--gold-bright);
+}
+
+.hero{
+padding:120px 20px 80px;
+text-align:center;
+}
+
+.hero h1{
+font-family:Cinzel;
+font-size:4rem;
+color:var(--gold-bright);
+}
+
+.hero p{
+margin-top:20px;
+font-size:1.25rem;
+max-width:750px;
+margin:auto;
+color:var(--parchment-dim);
+}
+
+.divider{
+width:260px;
+height:2px;
+margin:40px auto;
+background:linear-gradient(to right,transparent,var(--gold),transparent);
+}
+
+.container{
+max-width:1400px;
+margin:auto;
+padding:0 40px 80px;
+}
+
+.map-frame{
+background:var(--panel);
+padding:25px;
+border:1px solid var(--line);
+border-radius:10px;
+box-shadow:0 0 40px rgba(0,0,0,.35);
+}
+
+.map-frame img{
+width:100%;
+display:block;
+border-radius:8px;
+border:2px solid var(--gold);
+transition:.4s;
+cursor:pointer;
+}
+
+.map-frame img:hover{
+transform:scale(1.01);
+box-shadow:0 0 30px rgba(201,162,39,.4);
+}
+
+.info-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin-top:50px;
+}
+
+.card{
+background:var(--panel);
+padding:25px;
+border-radius:8px;
+border:1px solid var(--line);
+transition:.3s;
+}
+
+.card:hover{
+border-color:var(--gold);
+transform:translateY(-5px);
+}
+
+.card h3{
+font-family:Cinzel;
+color:var(--gold-bright);
+margin-bottom:15px;
+}
+
+.card p{
+color:var(--parchment-dim);
+}
+
+footer{
+margin-top:80px;
+padding:60px;
+text-align:center;
+border-top:1px solid var(--line);
+color:var(--lavender);
+}
+
+footer h2{
+font-family:Cinzel;
+color:var(--gold-bright);
+margin-bottom:10px;
+}
+
+@media(max-width:700px){
+
+nav{
+display:none;
+}
+
+.hero h1{
+font-size:2.8rem;
+}
+
+.container{
+padding:20px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+Zarenthia Kingdoms
+</div>
+
+<nav>
+
+    <a href="index.html">Home</a>
+    <a href="staff.html">Staff</a>
+    <a href="map.html">Wereldkaart</a>
+    <a href="faq.html">FAQ</a>
+    <a href="lore.html">Lore</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>De Wereld van Zarenthia</h1>
+
+<p>
+Ontdek alle koninkrijken, biomen en gebieden van Zarenthia.
+Elke speler schrijft mee aan de geschiedenis van deze wereld.
+</p>
+
+</section>
+
+<div class="divider"></div>
+
+<div class="container">
+
+<div class="map-frame">
+
+<a href="images/worldmap.png" target="_blank">
+<img src="images/worldmap.png" alt="Wereldkaart van Zarenthia">
+</a>
+
+</div>
+
+<div class="info-grid">
+
+<div class="card">
+
+<h3>🌍 De Wereld</h3>
+
+<p>
+Een enorme survivalwereld waarin elk koninkrijk zijn eigen geschiedenis schrijft.
+Nieuwe gebieden worden voortdurend ontdekt en bebouwd.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>🏰 Koninkrijken</h3>
+
+<p>
+Bouw een hoofdstad, breid je grenzen uit en vorm allianties met andere spelers
+of verklaar de oorlog.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>🌲 Biomen</h3>
+
+<p>
+Bossen, sneeuwvlaktes, woestijnen en vulkanische gebieden bieden unieke plekken
+voor jouw rijk.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>📍 Legenda</h3>
+
+<p>
+🟢 Bossen & Plains<br>
+⚪ Sneeuwgebied<br>
+🟠 Messa<br>
+🟡 Woestijn<br>
+🔵 Rivieren & Oceaan<br>
+🟤 Swamp<br>
+🟣 Cherry<br>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+<h2>Zarenthia Kingdoms</h2>
+
+<p>
+Eén wereld • Vele kronen • Eindeloze avonturen
+</p>
+<p>©2026 Zarenthia Kingdom</p>
+
+</footer>
+
+</body>
+</html>

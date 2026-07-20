@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zarenthia Kingdoms — Minecraft Server</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night: #14101c;
+    --night-deep: #0c0a12;
+    --panel: #221934;
+    --panel-light: #2c2140;
+    --gold: #c9a227;
+    --gold-bright: #ecca6a;
+    --parchment: #f1e6c9;
+    --parchment-dim: #d9cba3;
+    --crimson: #7d2039;
+    --crimson-bright: #a52e4a;
+    --lavender: #a89cba;
+    --line: rgba(201,162,39,0.28);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--night);
+    color: var(--parchment);
+    font-family: 'EB Garamond', serif;
+    font-size: 19px;
+    line-height: 1.65;
+  }
+
+  h1,h2,h3, .display{
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--gold-bright);
+    margin: 0;
+  }
+
+  .eyebrow{
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--lavender);
+  }
+
+  a{ color: inherit; }
+
+  /* ---------- background texture ---------- */
+  body{
+    background-image:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(125,32,57,0.35), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 20%, rgba(201,162,39,0.08), transparent 60%),
+      linear-gradient(var(--night), var(--night-deep));
+  }
+
+  /* ---------- ornamental divider ---------- */
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 340px;
+    color: var(--gold);
+  }
+  .divider .line{ flex:1; height:1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  .divider svg{ width:18px; height:18px; flex-shrink:0; }
+
+  /* ---------- header ---------- */
+  header{
+    position: sticky;
+    top:0;
+    z-index: 50;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 18px 6vw;
+    background: rgba(12,10,18,0.82);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .brand svg{ width:30px; height:30px; }
+  .brand span{ font-family:'Cinzel', serif; font-weight:700; letter-spacing:0.08em; font-size:1.05rem; color:var(--parchment); }
+  nav{ display:flex; gap: 34px; }
+  nav a{
+    text-decoration:none;
+    font-family:'Cinzel', serif;
+    font-size:0.76rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    transition: color 0.25s ease;
+  }
+  nav a:hover, nav a:focus-visible{ color: var(--gold-bright); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    padding: 15vh 6vw 14vh;
+    text-align:center;
+    overflow:hidden;
+  }
+  .hero .crest{ width:74px; height:74px; margin: 0 auto 28px; color: var(--gold); }
+  .hero h1{
+    font-size: clamp(2.6rem, 6.4vw, 5rem);
+    line-height: 1.05;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color: var(--crimson-bright);
+  }
+  .hero .tagline{
+    max-width: 560px;
+    margin: 22px auto 0;
+    font-family:'EB Garamond', serif;
+    font-style: italic;
+    font-size: 1.28rem;
+    color: var(--parchment-dim);
+  }
+
+  .cta-row{
+    margin-top: 44px;
+    display:flex;
+    gap: 18px;
+    justify-content:center;
+    flex-wrap: wrap;
+  }
+
+  .ip-plaque{
+    display:flex;
+    align-items:center;
+    gap: 14px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 14px 26px;
+    border-radius: 3px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  }
+  .ip-plaque .label{
+    font-family:'Cinzel', serif;
+    font-size:0.68rem;
+    letter-spacing: 0.2em;
+    color: var(--lavender);
+    text-transform: uppercase;
+    display:block;
+    margin-bottom: 4px;
+  }
+  .ip-plaque .ip{
+    font-family:'Cinzel', serif;
+    font-size: 1.15rem;
+    color: var(--gold-bright);
+    letter-spacing: 0.02em;
+  }
+  .copy-btn{
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold-bright);
+    font-family: 'Cinzel', serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 9px 16px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+  .copy-btn:hover, .copy-btn:focus-visible{ background: var(--gold); color: var(--night-deep); }
+
+  .version-tag{
+    align-self:center;
+    font-family:'Cinzel', serif;
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    color: var(--lavender);
+    border: 1px solid var(--line);
+    padding: 14px 20px;
+    border-radius: 3px;
+  }
+
+  /* ---------- sections ---------- */
+  section{ padding: 10vh 6vw; max-width: 1080px; margin: 0 auto; }
+  .section-head{ text-align:center; margin-bottom: 60px; }
+  .section-head h2{ font-size: clamp(1.9rem, 3.4vw, 2.6rem); margin-top: 14px; }
+
+  /* ---------- about ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 64px;
+    align-items:center;
+  }
+  .about-emblem{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    aspect-ratio: 1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+  .about-emblem::before{
+    content:"";
+    position:absolute; inset: 14px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+  }
+  .about-emblem svg{ width: 55%; height: 55%; color: var(--gold); }
+  .about-text p{ color: var(--parchment-dim); margin: 0 0 18px; }
+  .about-text p:last-child{ margin-bottom:0; }
+  .about-text .lede{ color: var(--parchment); font-size: 1.12rem; }
+
+  .pillars{
+    margin-top: 34px;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .pillar{
+    border-top: 1px solid var(--gold);
+    padding-top: 12px;
+  }
+  .pillar .name{ font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.06em; color: var(--gold-bright); }
+  .pillar .desc{ font-size: 0.94rem; color: var(--lavender); margin-top: 4px; }
+
+  /* ---------- server info ---------- */
+  .info-panel{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 52px;
+    position: relative;
+  }
+  .info-panel::before, .info-panel::after{
+    content:"";
+    position:absolute;
+    width: 26px; height: 26px;
+    border: 1px solid var(--gold);
+    opacity: 0.6;
+  }
+  .info-panel::before{ top:10px; left:10px; border-right:none; border-bottom:none; }
+  .info-panel::after{ bottom:10px; right:10px; border-left:none; border-top:none; }
+
+  .info-table{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 34px;
+    text-align:center;
+  }
+  .info-item .k{
+    font-family:'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    margin-bottom: 10px;
+  }
+  .info-item .v{
+    font-family:'Cinzel', serif;
+    font-size: 1.3rem;
+    color: var(--gold-bright);
+  }
+  .info-item .v.small{ font-size: 1rem; font-family:'EB Garamond', serif; color: var(--parchment); }
+
+  /* ---------- rules ---------- */
+  .decrees{
+    counter-reset: decree;
+    display: flex;
+    flex-direction: column;
+  }
+  .decree{
+    counter-increment: decree;
+    display:grid;
+    grid-template-columns: 84px 1fr;
+    gap: 28px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .decree:last-child{ border-bottom:none; }
+  .decree .numeral{
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.6rem;
+    color: var(--crimson-bright);
+    text-align:right;
+  }
+  .decree .numeral::before{ content: counter(decree, upper-roman); }
+  .decree h3{ font-size: 1.1rem; color: var(--parchment); font-family:'Cinzel', serif; margin-bottom: 6px; }
+  .decree p{ margin:0; color: var(--parchment-dim); font-size: 1rem; }
+
+  /* ---------- footer ---------- */
+  footer{
+    text-align:center;
+    padding: 8vh 6vw 6vh;
+    border-top: 1px solid var(--line);
+  }
+  footer .crest{ width:38px; height:38px; color: var(--gold); margin-bottom: 18px; }
+  footer p{ color: var(--lavender); font-size: 0.9rem; margin: 6px 0 0; }
+  footer .socials{ margin-top:18px; display:flex; gap:22px; justify-content:center; }
+  footer .socials a{
+    font-family:'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    text-decoration:none;
+    border-bottom: 1px solid transparent;
+    transition: color .25s ease, border-color .25s ease;
+  }
+  footer .socials a:hover{ color: var(--gold-bright); border-color: var(--gold); }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 760px){
+    nav{ display:none; }
+    .about-grid{ grid-template-columns: 1fr; }
+    .pillars{ grid-template-columns: 1fr; }
+    .info-table{ grid-template-columns: 1fr; gap: 26px; }
+    .info-panel{ padding: 36px 24px; }
+    .decree{ grid-template-columns: 48px 1fr; gap:16px; }
+    .decree .numeral{ font-size:1.2rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition: none !important; }
+  }
+
+  :focus-visible{ outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M32 4L38 20H26L32 4Z" fill="currentColor" opacity="0.9"/>
+      <path d="M14 22L20 18L18 34L14 22Z" fill="currentColor" opacity="0.7"/>
+      <path d="M50 22L44 18L46 34L50 22Z" fill="currentColor" opacity="0.7"/>
+      <rect x="24" y="24" width="16" height="20" rx="1" stroke="currentColor" stroke-width="2"/>
+      <path d="M12 44H52V52C52 55.3137 49.3137 58 46 58H18C14.6863 58 12 55.3137 12 52V44Z" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <span>Zarenthia Kingdoms</span>
+  </div>
+<nav>
+    <a href="index.html">Home</a>
+    <a href="staff.html">Staff</a>
+    <a href="map.html">Wereldkaart</a>
+    <a href="faq.html">FAQ</a>
+    <a href="lore.html">Lore</a>
+</nav>
+</header>
+
+<section class="hero">
+  <svg class="crest" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M32 4L38 20H26L32 4Z" fill="currentColor" opacity="0.9"/>
+    <path d="M14 22L20 18L18 34L14 22Z" fill="currentColor" opacity="0.7"/>
+    <path d="M50 22L44 18L46 34L50 22Z" fill="currentColor" opacity="0.7"/>
+    <rect x="24" y="24" width="16" height="20" rx="1" stroke="currentColor" stroke-width="2"/>
+    <path d="M12 44H52V52C52 55.3137 49.3137 58 46 58H18C14.6863 58 12 55.3137 12 52V44Z" stroke="currentColor" stroke-width="2"/>
+  </svg>
+  <div class="eyebrow">Een Minecraft Survival Server</div>
+  <h1><em>Zarenthia</em><br>Kingdoms</h1>
+  <p class="tagline">Eén wereld, vele kronen. Sticht je eigen koninkrijk, sluit allianties, en claim je plek op de kaart naast rijken van andere spelers.</p>
+
+  <div class="cta-row">
+    <div class="ip-plaque">
+      <div>
+        <span class="label">Server-adres</span>
+        <span class="ip">ZarenthiaKD.aternos.me</span>
+      </div>
+      <button class="copy-btn" onclick="navigator.clipboard.writeText('ZarenthiaKD.aternos.me'); this.textContent='Gekopieerd'; setTimeout(()=>this.textContent='Kopieer',1500)">Kopieer</button>
+    </div>
+    <div class="version-tag">Java · 1.20.x · Whitelist open</div>
+  </div>
+</section>
+
+<div class="divider">
+  <div class="line"></div>
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6.2 4.4 2.4 7.2L12 16.4l-6.2 4.4 2.4-7.2L2 9.2h7.6z"/></svg>
+  <div class="line"></div>
+</div>
+
+<section id="about">
+  <div class="section-head">
+    <div class="eyebrow">Hoofdstuk Een</div>
+    <h2>Eén Kaart, Vele Kronen</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-emblem">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M32 4L38 20H26L32 4Z" fill="currentColor" opacity="0.9"/>
+        <path d="M14 22L20 18L18 34L14 22Z" fill="currentColor" opacity="0.7"/>
+        <path d="M50 22L44 18L46 34L50 22Z" fill="currentColor" opacity="0.7"/>
+        <rect x="24" y="24" width="16" height="20" rx="1" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 44H52V52C52 55.3137 49.3137 58 46 58H18C14.6863 58 12 55.3137 12 52V44Z" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="about-text">
+      <p class="lede">Zarenthia is geen enkel rijk, maar het toneel waarop meerdere spelerkoninkrijken naast elkaar bestaan — elk met een eigen troon, eigen grondgebied en eigen geschiedenis.</p>
+      <p>Sticht een koninkrijk met je vrienden, claim land op de gedeelde kaart, en bouw het uit tot een echte macht. Sluit allianties met naburige rijken, drijf handel, of verdedig je grenzen — de politiek van Zarenthia wordt volledig door de spelers geschreven.</p>
+      <p>Nieuwkomers starten als vrij speler: sluit je aan bij een bestaand koninkrijk of verzamel bondgenoten en sticht je eigen troon.</p>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="name">Land & Claims</div>
+          <div class="desc">Beschermd grondgebied voor ieder koninkrijk, geen griefing, nooit.</div>
+        </div>
+        <div class="pillar">
+          <div class="name">Pure Survival</div>
+          <div class="desc">Vanilla-achtige regels — geen pay-to-win, geen kortere weggetjes.</div>
+        </div>
+        <div class="pillar">
+          <div class="name">Politiek door Spelers</div>
+          <div class="desc">Allianties, handel en rivaliteit tussen koninkrijken bepalen de kaart.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <div class="line"></div>
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6.2 4.4 2.4 7.2L12 16.4l-6.2 4.4 2.4-7.2L2 9.2h7.6z"/></svg>
+  <div class="line"></div>
+</div>
+
+<section id="info">
+  <div class="section-head">
+    <div class="eyebrow">Hoofdstuk Twee</div>
+    <h2>Rijd naar de Poort</h2>
+  </div>
+  <div class="info-panel">
+    <div class="info-table">
+      <div class="info-item">
+        <div class="k">IP</div>
+        <div class="v">ZarenthiaKD.aternos.me</div>
+      </div>
+      <div class="info-item">
+        <div class="k">Poort</div>
+        <div class="v">11877<br></div>
+      </div>
+      <div class="info-item">
+        <div class="k">Discord</div>
+        <div class="v small">discord.gg/zxYuPe8cDu</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <div class="line"></div>
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6.2 4.4 2.4 7.2L12 16.4l-6.2 4.4 2.4-7.2L2 9.2h7.6z"/></svg>
+  <div class="line"></div>
+</div>
+
+<section id="rules">
+  <div class="section-head">
+    <div class="eyebrow">Hoofdstuk Drie</div>
+    <h2>De Koninklijke Wetten</h2>
+  </div>
+  <div class="decrees">
+    <div class="decree">
+      <div class="numeral"></div>
+      <div>
+        <h3>Geen Griefing, Geen Diefstal</h3>
+        <p>Wat een andere bewoner bouwt of opslaat, is van hem of haar. Claims zijn wet, altijd.</p>
+      </div>
+    </div>
+    <div class="decree">
+      <div class="numeral"></div>
+      <div>
+        <h3>Spreek als een Bewoner Betaamt</h3>
+        <p>Geen haatzaaien, pesten of spam in de chat. Meningsverschillen blijven beschaafd.</p>
+      </div>
+    </div>
+    <div class="decree">
+      <div class="numeral"></div>
+      <div>
+        <h3>Bouw Verstandig in de Wildernis</h3>
+        <p>Houd grote bouwwerken op redelijke afstand van naburige koninkrijken. Vraag toestemming voor je vlak bij andermans claim bouwt.</p>
+      </div>
+    </div>
+    <div class="decree">
+      <div class="numeral"></div>
+      <div>
+        <h3>Geen Cheats, Geen Exploits</h3>
+        <p>X-ray, hacked clients en dupe-glitches leiden tot directe verbanning.</p>
+      </div>
+    </div>
+    <div class="decree">
+      <div class="numeral"></div>
+      <div>
+        <h3>PvP Alleen tijdens oorlog of gevecht</h3>
+        <p>PvP is om een gevecht of oorlog te winnen iemand in de buurt van jou rijk in de buurt in het wild killen mag</p>
+      </div>
+    </div>
+    <div class="decree">
+      <div class="numeral"></div>
+      <div>
+        <h3>Volg de Raad</h3>
+        <p>Beslissingen van staff zijn definitief. Geschillen los je op via Discord, niet in de chat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <svg class="crest" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M32 4L38 20H26L32 4Z" fill="currentColor" opacity="0.9"/>
+    <path d="M14 22L20 18L18 34L14 22Z" fill="currentColor" opacity="0.7"/>
+    <path d="M50 22L44 18L46 34L50 22Z" fill="currentColor" opacity="0.7"/>
+    <rect x="24" y="24" width="16" height="20" rx="1" stroke="currentColor" stroke-width="2"/>
+    <path d="M12 44H52V52C52 55.3137 49.3137 58 46 58H18C14.6863 58 12 55.3137 12 52V44Z" stroke="currentColor" stroke-width="2"/>
+  </svg>
+  <p>Zarenthia Kingdoms — een Minecraft-server, niet verbonden aan Mojang of Microsoft.</p>
+  <div class="socials">
+    <a href="#">Discord</a>
+    <a href="#">Dynmap</a>
+    <a href="#">Stem</a>
+  </div>
+  <br>
+<p>©2026 Zarenthia Kingdom</p>
+</footer>
+
+</body>
+</html>
